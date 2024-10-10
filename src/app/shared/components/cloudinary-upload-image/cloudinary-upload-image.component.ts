@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ImageUploaded } from '../../../core/interfaces/ImageUploaded.interface';
+import { UPLOAD_WIDGET_ES } from '../../constants/upload-widget-es';
 
 @Component({
   selector: 'app-cloudinary-upload-image',
@@ -11,7 +12,7 @@ import { ImageUploaded } from '../../../core/interfaces/ImageUploaded.interface'
 })
 export class CloudinaryUploadImageComponent implements OnInit {
   myWidget: any;
-
+  @Output() onUploaded: EventEmitter<string> = new EventEmitter<string>();
   ngOnInit(): void {
     this.initWidget();
   }
@@ -33,22 +34,25 @@ export class CloudinaryUploadImageComponent implements OnInit {
         // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
         theme: 'purple', //change to a purple theme,
         language: 'es',
-        text: {
+        text: UPLOAD_WIDGET_ES.default,
+        /* text: {
           es: {
+            or: 'ó',
             menu: {
-              files: 'Mi dispositivo'
+              files: 'Mi dispositivo',
             },
             local: {
-              browse: 'Mi dispositivo',
+              browse: 'Mi galería',
               dd_title_single: 'Arrastra tu imagen aquí',
-            }
-          }
-        }
+            },
+          },
+        }, */
       },
       (error: any, result: any) => {
         if (!error && result && result.event === 'success') {
           console.log('Imagen subida con éxito:', result.info);
           const imageUploaded: ImageUploaded = result.info;
+          this.onUploaded.emit(imageUploaded.public_id);
           //this.showImage(imageUploaded.public_id);
           // Aquí puedes obtener el URL de la imagen subida y almacenarla, por ejemplo:
           console.log('URL de la imagen:', result.info.secure_url);

@@ -3,7 +3,26 @@
     <div
       class="mx-auto grid max-w-lg grid-cols-1 items-center place-items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-1 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-1"
     >
-      <app-cloudinary-upload-image></app-cloudinary-upload-image>
+      <div
+        class="w-full h-full mx-auto grid max-w-lg grid-cols-1 items-center place-items-center gap-y-10 sm:max-w-xl sm:grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2"
+      >
+        <div
+          class="w-full h-full border border-white grid place-items-center p-5"
+        >
+          @if(imagePublicId()) {
+          <app-image-visualization
+            [imagePublicId]="imagePublicId()"
+          ></app-image-visualization>
+          } @else {
+          <app-cloudinary-upload-image
+            (onUploaded)="showImage($event)"
+          ></app-cloudinary-upload-image>
+          }
+        </div>
+        <div class="w-full h-full border border-white p-5">
+          <p>asdsa</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
