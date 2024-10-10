@@ -30,7 +30,7 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/assets/"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",

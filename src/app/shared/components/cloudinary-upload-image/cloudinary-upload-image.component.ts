@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ImageUploaded } from '../../../core/interfaces/ImageUploaded.interface';
 import { UPLOAD_WIDGET_ES } from '../../constants/upload-widget-es';
@@ -12,7 +12,8 @@ import { UPLOAD_WIDGET_ES } from '../../constants/upload-widget-es';
 })
 export class CloudinaryUploadImageComponent implements OnInit {
   myWidget: any;
-  @Output() onUploaded: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onUploaded: EventEmitter<ImageUploaded> =
+    new EventEmitter<ImageUploaded>();
   ngOnInit(): void {
     this.initWidget();
   }
@@ -50,12 +51,12 @@ export class CloudinaryUploadImageComponent implements OnInit {
       },
       (error: any, result: any) => {
         if (!error && result && result.event === 'success') {
-          console.log('Imagen subida con éxito:', result.info);
           const imageUploaded: ImageUploaded = result.info;
-          this.onUploaded.emit(imageUploaded.public_id);
+          this.onUploaded.emit(imageUploaded);
+          //console.log('imageUploaded', imageUploaded);
           //this.showImage(imageUploaded.public_id);
           // Aquí puedes obtener el URL de la imagen subida y almacenarla, por ejemplo:
-          console.log('URL de la imagen:', result.info.secure_url);
+          //console.log('URL de la imagen:', result.info.secure_url);
         }
       }
     );

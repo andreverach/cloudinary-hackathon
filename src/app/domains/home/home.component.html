@@ -9,9 +9,10 @@
         <div
           class="w-full h-full border border-white grid place-items-center p-5"
         >
-          @if(imagePublicId()) {
+          @if(imageUploaded()) {
           <app-image-visualization
-            [imagePublicId]="imagePublicId()"
+            [imagePublicId]="imageUploaded().public_id"
+            [filterToApply]="filterToApply()"
           ></app-image-visualization>
           } @else {
           <app-cloudinary-upload-image
@@ -19,8 +20,33 @@
           ></app-cloudinary-upload-image>
           }
         </div>
-        <div class="w-full h-full border border-white p-5">
-          <p>asdsa</p>
+        <div
+          class="w-full h-full border border-white grid place-items-center p-5"
+        >
+          <h3 class="font-semibold text-white">EFECTOS DISPONIBLES</h3>
+          <ul role="list" class="divide-y divide-white">
+            @for (filterItem of availableFilters; track $index) {
+              <li class="flex justify-between gap-x-6 py-5">
+                <div
+                  class="flex min-w-0 gap-x-4 cursor-pointer hover:opacity-50"
+                  (click)="applyFilter(filterItem.prompt)"
+                >
+                  <figure>
+                    <img
+                      class="icon-image"
+                      [src]="'./../../../assets/images/icons/' + filterItem.image"
+                      alt="magic-icon"
+                    />
+                  </figure>
+                  <div class="min-w-0 flex-auto grid place-items-center">
+                    <p class="text-md font-semibold leading-6 text-white">
+                      {{ filterItem.description }}
+                    </p>
+                  </div>
+                </div>
+              </li> 
+            }                       
+          </ul>
         </div>
       </div>
     </div>
