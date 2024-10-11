@@ -98,70 +98,17 @@ export class ImageVisualizationComponent implements OnInit {
           .resize(scale().width(1000))
           .delivery(quality(auto()))
           .delivery(format(auto()))
-          //.effect(backgroundRemoval()) //quito el fondo
           .effect(generativeBackgroundReplace().prompt(newFil)) //reemplkaza el fondo
-          //.effect(generativeBackgroundReplace().prompt('put some spiders'))
-          //.effect(generativeRecolor('face', 'red')) //cambia el color de algo
-          //.effect(generativeRecolor('eyes', 'red'))
-          .effect(generativeReplace().from('shirt').to('vampire jacket'))
-          .effect(
-            generativeRecolor(['eye', 'hair'], '#331c5d').detectMultiple()
-          ) //pinta algo
-          /* .overlay(
-            source(image('hackathon-images/opnfyevdqmrivkgg4xqeo')).position(
-              new Position()
-                .gravity(compass('south_east'))
-                .offsetX(20)
-                .offsetY(20)
-            )
-          ); */
-        /* .resize(
-            pad()
-              .width(800)
-              .height(800)
-              .background(generativeFill().prompt('mug of coffee and cookies'))
-          ) */
-        //.resize(scale().height(150)); //agregar objeto a la imagen
-        //.resize(pad().background(generativeFill().prompt(newFil)))
-        //.effect(generativeRemove().prompt('eyes').detectMultiple())
-        //.effect(outline().width(15).blurLevel(200).color('#331c5d'));
-        //.effect(generativeReplace().from('eyes').to('scars'))
-        /* .effect(
-            generativeReplace()
-              .from('shirt')
-              .to('cable knit sweater')
-              .preserveGeometry()
-          ) */
-        //.effect(generativeRemove().prompt('eyes')); //remueve algo
-        //.effect(generativeRecolor('device', '#EA672A').detectMultiple());//cambia el color de todo lo que encuentre en este ejemplo dispositivos
-        //.effect(generativeRecolor(['device', hair], '#EA672A').detectMultiple());//cambia el color de todo lo que encuentre en este ejemplo dispositivos y pelo
-        //.effect(generativeRecolor('eyes', 'red'))
-        //.effect(generativeRecolor('eye', 'blue').detectMultiple());
-        //.effect(extract().prompt('camera', 'glasses', 'plant')); extraer
-        //.effect(enhance()); //mejorar imagen
-        //.adjust(sharpen().strength(150)); // mejorar tmb
-        /* .resize(
-            auto()
-              .width(880)
-              .height(940)
-              .gravity(autoGravity())
-          ); */
-        /* .resize(
-            pad()
-              .aspectRatio(ar1X1())
-              .gravity(compass("center"))
-              .background(generativeFill())
-          ); */
-
+          .effect(generativeRecolor(['hair'], '#331c5d').detectMultiple()); //pinta algo
         this.isLoading = true;
         //console.log('cloudinaryImage', this.cloudinaryImage);
-        console.log('cloudinaryImage.toURL()', this.cloudinaryImage.toURL());
+        //console.log('cloudinaryImage.toURL()', this.cloudinaryImage.toURL());
         this.transformedImage = this.cloudinaryImage.toURL();
       }
     });
   }
   onLoadTransformedImage() {
-    console.log('onLoadTransformedImage', this.transformedImage);
+    //console.log('onLoadTransformedImage', this.transformedImage);
     this.isLoading = false;
   }
   onErrorLoadImage() {
@@ -176,4 +123,55 @@ export class ImageVisualizationComponent implements OnInit {
 /**
  * const tagsObject = result.info.info.detection.object_detection.data.unidet.tags;
         const tagNames = Object.keys(tagsObject);
+        
  */
+/* .overlay(
+            source(image('hackathon-images/opnfyevdqmrivkgg4xqeo')).position(
+              new Position()
+                .gravity(compass('south_east'))
+                .offsetX(20)
+                .offsetY(20)
+            )
+          ); */
+/* .resize(
+            pad()
+              .width(800)
+              .height(800)
+              .background(generativeFill().prompt('mug of coffee and cookies'))
+          ) */
+//.effect(backgroundRemoval()) //quito el fondo
+//.effect(generativeBackgroundReplace().prompt('put some spiders'))
+//.effect(generativeRecolor('face', 'red')) //cambia el color de algo
+//.effect(generativeRecolor('eyes', 'red'))
+//.effect(generativeReplace().from('shirt').to('vampire jacket'))
+//.resize(scale().height(150)); //agregar objeto a la imagen
+//.resize(pad().background(generativeFill().prompt(newFil)))
+//.effect(generativeRemove().prompt('eyes').detectMultiple())
+//.effect(outline().width(15).blurLevel(200).color('#331c5d'));
+//.effect(generativeReplace().from('eyes').to('scars'))
+/* .effect(
+            generativeReplace()
+              .from('shirt')
+              .to('cable knit sweater')
+              .preserveGeometry()
+          ) */
+//.effect(generativeRemove().prompt('eyes')); //remueve algo
+//.effect(generativeRecolor('device', '#EA672A').detectMultiple());//cambia el color de todo lo que encuentre en este ejemplo dispositivos
+//.effect(generativeRecolor(['device', hair], '#EA672A').detectMultiple());//cambia el color de todo lo que encuentre en este ejemplo dispositivos y pelo
+//.effect(generativeRecolor('eyes', 'red'))
+//.effect(generativeRecolor('eye', 'blue').detectMultiple());
+//.effect(extract().prompt('camera', 'glasses', 'plant')); extraer
+//.effect(enhance()); //mejorar imagen
+//.adjust(sharpen().strength(150)); // mejorar tmb
+/* .resize(
+            auto()
+              .width(880)
+              .height(940)
+              .gravity(autoGravity())
+          ); */
+/* .resize(
+            pad()
+              .aspectRatio(ar1X1())
+              .gravity(compass("center"))
+              .background(generativeFill())
+          ); */
