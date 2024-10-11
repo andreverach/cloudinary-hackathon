@@ -2,26 +2,28 @@ import {
   Component,
   computed,
   effect,
+  EventEmitter,
   inject,
   input,
   OnInit,
+  Output,
   signal,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CloudinaryModule } from '@cloudinary/ng';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 
 import { CloudinaryInstanceService } from '../../../core/services/cloudinary-instance.service';
-import { pad } from '@cloudinary/url-gen/actions/resize';
+import { pad, scale } from '@cloudinary/url-gen/actions/resize';
 import {
   generativeBackgroundReplace,
   generativeRecolor,
   generativeRemove,
   generativeReplace,
   outline,
-  extract 
+  extract,
 } from '@cloudinary/url-gen/actions/effect';
 import { generativeFill } from '@cloudinary/url-gen/qualifiers/background';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-image-visualization',
@@ -34,6 +36,7 @@ export class ImageVisualizationComponent implements OnInit {
   cloudinaryImage!: CloudinaryImage;
   imagePublicId = input<string>();
   filterToApply = input<string>('');
+  @Output() onRefresh: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   transformedImage = '';
   isLoading: boolean = false;
   hasError: boolean = false;
@@ -81,26 +84,34 @@ export class ImageVisualizationComponent implements OnInit {
   listenFilter() {
     effect(() => {
       if (this.filterToApply()) {
+        this.transformedImage = '';
         const newFil = this.filterToApply();
         console.log('newFil', newFil);
         this.cloudinaryImage
           .effect(generativeBackgroundReplace().prompt(newFil)) //reemplkaza el fondo
-          .resize(pad().background(generativeFill().prompt(newFil))) //agregar objeto a la imagen
+          //.effect(generativeBackgroundReplace().prompt('put some spiders'))
           //.effect(generativeRecolor('face', 'red')) //cambia el color de algo
           //.effect(generativeRecolor('eyes', 'red'))
           .effect(
-            generativeRecolor(['tongue', 'hair'], '#331c5d').detectMultiple()
-          ) //pinta algo
-          .resize(pad().background(generativeFill().prompt(newFil)))
-          .effect(generativeRemove().prompt('eyes').detectMultiple())          
-          .effect(outline().width(15).blurLevel(200).color('#331c5d'));
-          //.effect(generativeReplace().from('eyes').to('scars'))
-          /* .effect(
+            generativeRecolor(['eye', 'hair'], '#331c5d').detectMultiple()
+          ); //pinta algo
+        /* .resize(
+            pad()
+              .width(800)
+              .height(800)
+              .background(generativeFill().prompt('mug of coffee and cookies'))
+          ) */
+        //.resize(scale().height(150)); //agregar objeto a la imagen
+        //.resize(pad().background(generativeFill().prompt(newFil)))
+        //.effect(generativeRemove().prompt('eyes').detectMultiple())
+        //.effect(outline().width(15).blurLevel(200).color('#331c5d'));
+        //.effect(generativeReplace().from('eyes').to('scars'))
+        /* .effect(
             generativeReplace()
               .from('shirt')
               .to('cable knit sweater')
               .preserveGeometry()
-          ) */          
+          ) */
         //.effect(generativeRemove().prompt('eyes')); //remueve algo
         //.effect(generativeRecolor('device', '#EA672A').detectMultiple());//cambia el color de todo lo que encuentre en este ejemplo dispositivos
         //.effect(generativeRecolor(['device', hair], '#EA672A').detectMultiple());//cambia el color de todo lo que encuentre en este ejemplo dispositivos y pelo
@@ -109,18 +120,21 @@ export class ImageVisualizationComponent implements OnInit {
 
         this.isLoading = true;
         //console.log('cloudinaryImage', this.cloudinaryImage);
-        //console.log('cloudinaryImage.toURL()', this.cloudinaryImage.toURL());
+        console.log('cloudinaryImage.toURL()', this.cloudinaryImage.toURL());
         this.transformedImage = this.cloudinaryImage.toURL();
       }
     });
   }
   onLoadTransformedImage() {
+    console.log('onLoadTransformedImage', this.transformedImage);
     this.isLoading = false;
   }
-
-  onErrorTransformedImage() {
+  onErrorLoadImage() {
     this.isLoading = false;
-    this.hasError = true;
+  }
+  refresh() {
+    this.onRefresh.emit(true);
+    this.transformedImage = '';
   }
 }
 

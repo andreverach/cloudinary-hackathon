@@ -13,6 +13,7 @@
           <app-image-visualization
             [imagePublicId]="imageUploaded().public_id"
             [filterToApply]="filterToApply()"
+            (onRefresh)="refreshStates($event)"
           ></app-image-visualization>
           } @else {
           <app-cloudinary-upload-image
@@ -26,26 +27,26 @@
           <h3 class="font-semibold text-white">EFECTOS DISPONIBLES</h3>
           <ul role="list" class="divide-y divide-white">
             @for (filterItem of availableFilters; track $index) {
-              <li class="flex justify-between gap-x-6 py-5">
-                <div
-                  class="flex min-w-0 gap-x-4 cursor-pointer hover:opacity-50"
-                  (click)="applyFilter(filterItem.prompt)"
-                >
-                  <figure>
-                    <img
-                      class="icon-image"
-                      [src]="'./../../../assets/images/icons/' + filterItem.image"
-                      alt="magic-icon"
-                    />
-                  </figure>
-                  <div class="min-w-0 flex-auto grid place-items-center">
-                    <p class="text-md font-semibold leading-6 text-white">
-                      {{ filterItem.description }}
-                    </p>
-                  </div>
+            <li class="flex justify-between gap-x-6 py-5">
+              <div
+                class="flex min-w-0 gap-x-4 cursor-pointer hover:opacity-50"
+                (click)="applyFilter(filterItem.prompt)"
+              >
+                <figure>
+                  <img
+                    class="icon-image"
+                    [src]="'./../../../assets/images/icons/' + filterItem.image"
+                    alt="magic-icon"
+                  />
+                </figure>
+                <div class="min-w-0 flex-auto grid place-items-center">
+                  <p class="text-md font-semibold leading-6 text-white">
+                    {{ filterItem.description }}
+                  </p>
                 </div>
-              </li> 
-            }                       
+              </div>
+            </li>
+            }
           </ul>
         </div>
       </div>

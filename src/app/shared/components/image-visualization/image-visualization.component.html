@@ -5,7 +5,7 @@
     (load)="onLoadTransformedImage()"
   ></advanced-image>
 </figure>
-} @if(isLoading && !hasError) {
+} @if(isLoading) {
 <div class="grid place-items-center">
   <div role="status">
     <svg
@@ -29,17 +29,18 @@
   <p class="text-slate-100 animate-pulse">La imagen se está transformando 👻</p>
 </div>
 }
-<figure [ngClass]="{ 'hidden': !transformedImage && hasError }">
-  <img
-    [src]="transformedImage"
-    alt="transformed-image"
-    (load)="onLoadTransformedImage()"
-    (error)="onErrorTransformedImage()"
-  />
-</figure>
-
-@if(transformedImage && hasError && !isLoading) {
-<p class="text-slate-100 animate-pulse">
-  La imagen no pudo ser procesada, puedes intentarlo nuevamente 👻
-</p>
-}
+<div [ngClass]="{ 'hidden': !transformedImage }" class="grid place-items-center">
+  @if(!isLoading) {
+    <button id="upload_widget" (click)="refresh()" class="cloudinary-button">
+      Probar otra imagen
+    </button>
+  }
+  <figure>
+    <img
+      [src]="transformedImage"
+      alt="transformed-image"
+      (load)="onLoadTransformedImage()"
+      (error)="onErrorLoadImage()"
+    />
+  </figure>
+</div>

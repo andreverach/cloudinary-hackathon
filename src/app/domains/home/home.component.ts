@@ -28,4 +28,10 @@ export default class HomeComponent implements OnInit {
     }
     //console.log(this.filterToApply());
   }
+  refreshStates(event: boolean) {
+    if (event) {
+      this.imageUploaded.set(null);
+      this.filterToApply.set('');
+    }
+  }
 }
