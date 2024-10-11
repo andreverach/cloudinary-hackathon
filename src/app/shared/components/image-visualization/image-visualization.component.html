@@ -31,9 +31,9 @@
 }
 <div [ngClass]="{ 'hidden': !transformedImage }" class="grid place-items-center">
   @if(!isLoading) {
-    <button id="upload_widget" (click)="refresh()" class="cloudinary-button">
-      Probar otra imagen
-    </button>
+  <button (click)="refresh()" class="cloudinary-button mb-10 bg-orange-soft">
+    Probar otra imagen
+  </button>
   }
   <figure>
     <img
