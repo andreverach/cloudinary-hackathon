@@ -1,27 +1,62 @@
-# ScaryFilterImage
+# Cloudinary CloudCreate: Spooky AI Hackathon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+![Hackathon Banner](https://res.cloudinary.com/cloudinary-marketing/images/c_fill,w_859/f_auto,q_auto/v1728314770/Web_Assets/blog/hackathon-banner/hackathon-banner-jpg?_i=AA)
 
-## Development server
+## Descripción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Esta aplicación fue creada para la **Cloudinary CloudCreate: Spooky AI Hackathon** con temática de terror para Halloween. La app permite a los usuarios **subir imágenes** y **aplicar filtros de terror** a las mismas, generando efectos espeluznantes con temática de Halloween.
 
-## Code scaffolding
+Utiliza la API de **Cloudinary** para el procesamiento de las imágenes en la nube, permitiendo transformar, optimizar y aplicar filtros personalizados a las imágenes subidas.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Funcionalidades
 
-## Build
+- **Subir imágenes**: Los usuarios pueden subir imágenes desde su dispositivo.
+- **Aplicar filtros de terror**: Filtros temáticos de Halloween aplicados a las imágenes, tales como efectos de sombras, distorsiones y colores oscuros.
+- **Vista previa de imagen**: Visualiza la imagen subida con el filtro aplicado en tiempo real.
+- **Descarga de imágenes**: Descarga la imagen con los filtros aplicados.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Tecnologías utilizadas
 
-## Running unit tests
+- **Angular 18**: Framework frontend utilizado para el desarrollo de la aplicación.
+  - **Componentes standalone**: Modularidad y flexibilidad en el desarrollo de componentes.
+  - **Lazy Loading**: Carga eficiente de las imágenes y recursos.
+- **Cloudinary API**: Utilizada para el procesamiento de imágenes en la nube.
+  - Transformaciones de imágenes.
+  - Aplicación de filtros.
+  - Optimización y almacenamiento de las imágenes.
+- **CSS3 / TailwindCSS**: Framework de diseño CSS para estilizar y hacer la aplicación responsiva.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Demo en vivo
 
-## Running end-to-end tests
+Puedes probar la aplicación en el siguiente enlace:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+🔗 [Demo en vivo](https://my-scary-photo.netlify.app/)
 
-## Further help
+## Instalación y ejecución local
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Sigue estos pasos para clonar y ejecutar la aplicación localmente:
+
+### Requisitos previos
+
+- **Node.js** (Versión 14 o superior)
+- **Angular CLI** (Instalado globalmente)
+- **Cuenta de Cloudinary** (Para la gestión y transformación de las imágenes)
+
+### Instrucciones
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/andreverach/cloudinary-hackathon.git
+   cd cloudinary-hackathon
+   npm install
+   ng serve
+
+2. Crea tus archivos de enviroments y agrega los siguientes datos
+
+   ```bash
+   CLOUD_NAME: 'tu-codigo',
+   UPLOAD_PRESET: 'tu-codigo',
+   PUBLIC_API_KEY: 'tu-codigo',
+   SECRET_API_KEY: 'tu-codigo',
+

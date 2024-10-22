@@ -93,7 +93,7 @@ export class ImageVisualizationComponent implements OnInit {
       if (this.filterToApply()) {
         this.transformedImage = '';
         const newFil = this.filterToApply();
-        console.log('newFil', newFil);
+        //console.log('newFil', newFil);
         this.cloudinaryImage
           .resize(scale().width(1000))
           .delivery(quality(auto()))
